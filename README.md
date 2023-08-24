@@ -7,7 +7,7 @@
 
 > You need to have Python installed in your PC to run this program. Haven't installed it yet? Head over to [www.python.org](https://www.python.org/downloads/) to download Python or download it from Microsoft Store.
 
-1. Clone the reposatory
+1. Clone the repository
 ```sh
 git clone https://github.com/sandarutharuneth/watermark-ngine.git
 ```
