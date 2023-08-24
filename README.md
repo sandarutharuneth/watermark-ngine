@@ -1,5 +1,5 @@
 # WATERMARK NGINE
-> Add a watermark easily to your images
+> Add a watermark to bulk of images automatically and easily. Fully customizable and and easy to understand.
 
 ----
 
