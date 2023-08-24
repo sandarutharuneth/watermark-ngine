@@ -58,6 +58,6 @@ if __name__ == "__main__":
     print(RED_COLOR + STARTUP_LOGO + RESET_COLOR)
     add_watermark(input_folder, output_folder, watermark_path)
 
-// ©️ Copyright Project Razer LLC 2023 All Rights Reserved.
-// Credits: @sandarutharuneth
-// License: CC0 1.0 Universal
+# ©️ Copyright Project Razer LLC 2023 All Rights Reserved.
+# Credits: @sandarutharuneth
+# License: CC0 1.0 Universal
