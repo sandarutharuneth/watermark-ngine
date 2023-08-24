@@ -24,3 +24,11 @@ pip install Pillow
 python app.py
 ```
 ### That all! You have successfully ran the program!
+
+---
+
+<h3 align="left">Support Me:</h3>
+<p><a href="https://paypal.me/officialrazer"> <img src="https://github.com/andreostrovsky/donate-with-paypal/blob/master/dark.svg" height="50" width="210" alt="sandarudev" /></a>
+</p><br><br>
+
+---
