@@ -56,6 +56,7 @@ def add_watermark(input_path, output_path, watermark_path, watermark_width_facto
 ---------------------------------------            
           """ )
 
+#Control Panel
 if __name__ == "__main__":
     input_folder = "data"
     output_folder = "watermarked_images"
@@ -63,10 +64,14 @@ if __name__ == "__main__":
     watermark_width_factor = 0.8  # Adjust the watermark width (0.8 means 80%)
     watermark_height_factor = 0.8  # Adjust the watermark height (0.8 means 80%)
     watermark_opacity = 0.7  # Adjust the watermark opacity (0.7 means 70%)
-    watermark_position = "TOP_LEFT"  # Change this to the desired position
+    watermark_position = "TOP_LEFT"  # Change this to the desired position (TOP_RIGHT, TOP_LEFT, BOTTOM_RIGHT, BOTTOM_LEFT, CENTER)
     
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
     print(RED_COLOR + STARTUP_LOGO + RESET_COLOR)
     add_watermark(input_folder, output_folder, watermark_path, watermark_width_factor, watermark_height_factor, watermark_opacity, watermark_position)
+
+# ©️ Copyright Project Razer LLC 2023 All Rights Reserved.
+# Credits: @sandarutharuneth
+# License: CC0 1.0 Universal
