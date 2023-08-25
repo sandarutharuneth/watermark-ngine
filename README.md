@@ -33,8 +33,7 @@ python app.py
 ## Customizations
 Increase or Decrease the size of your watermark
 ```py
-watermark_width_factor = 0.8  # Adjust the watermark width (0.8 means 80%)
-watermark_height_factor = 0.8  # Adjust the watermark height (0.8 means 80%)
+watermark_factor = 0.10  # Increase size of the watermark (0.10 means 10%)
 ```
 
 Watermark Opacity
@@ -43,7 +42,7 @@ watermark_opacity = 0.7  # Adjust the watermark opacity (0.7 means 70%)
 ```
 Watermark Position
 ```py
-watermark_position = "TOP_LEFT"
+ watermark_position = "BOTTOM_RIGHT"
 # Available position values:
 # TOP_RIGHT
 # TOP_LEFT
