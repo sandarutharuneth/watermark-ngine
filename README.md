@@ -1,6 +1,8 @@
 # WATERMARK NGINE
 > Add a watermark to bulk of images automatically and easily. Fully customizable and and easy to understand.
 
+<a href="https://imgur.com/qgpwlbQ"><img src="https://i.imgur.com/qgpwlbQ.png" title="source: imgur.com" /></a>
+
 ----
 
 ## How to Setup
