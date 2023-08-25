@@ -33,15 +33,25 @@ python app.py
 ## Customizations
 Increase or Decrease the size of your watermark
 ```py
-new_width = int(watermark.width * 0.8) # 0.8% Increased
-new_height = int(watermark.height * 0.8) # 0.8% Increased
+watermark_width_factor = 0.8  # Adjust the watermark width (0.8 means 80%)
+watermark_height_factor = 0.8  # Adjust the watermark height (0.8 means 80%)
 ```
 
 Watermark Opacity
 ```py
-watermark_with_opacity.putpixel((x, y), (r, g, b, int(a * 0.7)))
-# 0.7 = 70% Watermark opacity
+watermark_opacity = 0.7  # Adjust the watermark opacity (0.7 means 70%)
 ```
+Watermark Position
+```py
+watermark_position = "TOP_LEFT"
+# Available position values:
+# TOP_RIGHT
+# TOP_LEFT
+# BOTTOM_RIGHT
+# BOTTOM_LEFT
+# CENTER
+```
+
 ---
 
 <h3 align="left">Support Me:</h3>
