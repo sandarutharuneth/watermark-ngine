@@ -15,13 +15,30 @@ STARTUP_LOGO = r"""
 ---------------------------------------------------------------- 
 """
 
-def add_watermark(input_path, output_path, watermark_path, watermark_width_factor, watermark_height_factor, watermark_opacity, watermark_position):
+def calculate_watermark_position(image, watermark, watermark_position):
+    image_width, image_height = image.size
+    watermark_width, watermark_height = watermark.size
+
+    if watermark_position == "TOP_RIGHT":
+        return (image_width - watermark_width, 0)
+    elif watermark_position == "BOTTOM_RIGHT":
+        return (image_width - watermark_width, image_height - watermark_height)
+    elif watermark_position == "TOP_LEFT":
+        return (0, 0)
+    elif watermark_position == "BOTTOM_LEFT":
+        return (0, image_height - watermark_height)
+    elif watermark_position == "CENTER":
+        return ((image_width - watermark_width) // 2, (image_height - watermark_height) // 2)
+    else:
+        return None
+
+def add_watermark(input_path, output_path, watermark_path, watermark_factor, watermark_opacity, watermark_position):
     watermark = Image.open(watermark_path)
     
     # Calculate new dimensions for the watermark image
-    new_width = int(watermark.width * watermark_width_factor)
-    new_height = int(watermark.height * watermark_height_factor)
-    watermark = watermark.resize((new_width, new_height))
+    watermark_width = int(watermark.width * watermark_factor)
+    watermark_height = int(watermark.height * watermark_factor)
+    watermark = watermark.resize((watermark_width, watermark_height))
     
     watermark = watermark.convert("RGBA")
     watermark_with_opacity = Image.new("RGBA", watermark.size)
@@ -34,20 +51,15 @@ def add_watermark(input_path, output_path, watermark_path, watermark_width_facto
         if image_file.lower().endswith(('.png', '.jpg', '.jpeg', '.gif')):
             image_path = os.path.join(input_path, image_file)
             image = Image.open(image_path)
-            if watermark_position == "TOP_RIGHT":
-                watermark_position = (image.width - watermark_with_opacity.width, 0)
-            elif watermark_position == "BOTTOM_RIGHT":
-                watermark_position = (image.width - watermark_with_opacity.width, image.height - watermark_with_opacity.height)
-            elif watermark_position == "TOP_LEFT":
-                watermark_position = (0, 0)
-            elif watermark_position == "BOTTOM_LEFT":
-                watermark_position = (0, image.height - watermark_with_opacity.height)
-            elif watermark_position == "CENTER":
-                watermark_position = ((image.width - watermark_with_opacity.width) // 2, (image.height - watermark_with_opacity.height) // 2)
-            image.paste(watermark_with_opacity, watermark_position, watermark_with_opacity)
-            output_file = os.path.join(output_path, image_file)
-            image.save(output_file)
-            print(BLUE_COLOR + f"Watermark added: {image_file}" + RESET_COLOR)
+            
+            watermark_pos = calculate_watermark_position(image, watermark_with_opacity, watermark_position)
+            if watermark_pos:
+                image.paste(watermark_with_opacity, watermark_pos, watermark_with_opacity)
+                output_file = os.path.join(output_path, image_file)
+                image.save(output_file)
+                print(BLUE_COLOR + f"Watermark added: {image_file}" + RESET_COLOR)
+            else:
+                print(f"Skipping {image_file}: Invalid watermark position")
 
     print(GREEN_COLOR + f"""
 ---------------------------------------                                   
@@ -56,21 +68,19 @@ def add_watermark(input_path, output_path, watermark_path, watermark_width_facto
 ---------------------------------------            
           """ )
 
-#Control Panel
 if __name__ == "__main__":
     input_folder = "data"
     output_folder = "watermarked_images"
     watermark_path = "static/watermark.png"
-    watermark_width_factor = 0.8  # Adjust the watermark width (0.8 means 80%)
-    watermark_height_factor = 0.8  # Adjust the watermark height (0.8 means 80%)
+    watermark_factor = 0.10  # Increase size of the watermark (0.10 means 10%)
     watermark_opacity = 0.7  # Adjust the watermark opacity (0.7 means 70%)
-    watermark_position = "TOP_LEFT"  # Change this to the desired position (TOP_RIGHT, TOP_LEFT, BOTTOM_RIGHT, BOTTOM_LEFT, CENTER)
+    watermark_position = "BOTTOM_RIGHT"  # Change this to the desired position (TOP_RIGHT, TOP_LEFT, BOTTOM_RIGHT, BOTTOM_LEFT, CENTER)
     
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
     print(RED_COLOR + STARTUP_LOGO + RESET_COLOR)
-    add_watermark(input_folder, output_folder, watermark_path, watermark_width_factor, watermark_height_factor, watermark_opacity, watermark_position)
+    add_watermark(input_folder, output_folder, watermark_path, watermark_factor, watermark_opacity, watermark_position)
 
 # ©️ Copyright Project Razer LLC 2023 All Rights Reserved.
 # Credits: @sandarutharuneth
