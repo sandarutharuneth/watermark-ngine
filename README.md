@@ -29,6 +29,21 @@ python app.py
 
 ---
 
+
+## Customizations
+Increase or Decrease the size of your watermark
+```py
+new_width = int(watermark.width * 0.8) # 0.8% Increased
+new_height = int(watermark.height * 0.8) # 0.8% Increased
+```
+
+Watermark Opacity
+```py
+watermark_with_opacity.putpixel((x, y), (r, g, b, int(a * 0.7)))
+# 0.7 = 70% Watermark opacity
+```
+---
+
 <h3 align="left">Support Me:</h3>
 <p><a href="https://paypal.me/officialrazer"> <img src="https://github.com/andreostrovsky/donate-with-paypal/blob/master/dark.svg" height="50" width="210" alt="sandarudev" /></a>
 </p><br><br>
