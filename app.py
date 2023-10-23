@@ -19,27 +19,27 @@ def calculate_watermark_position(image, watermark, watermark_position):
     image_width, image_height = image.size
     watermark_width, watermark_height = watermark.size
 
-    if watermark_position == "TOP_RIGHT":
-        return (image_width - watermark_width, 0)
+    if watermark_position == "BOTTOM_LEFT":
+        return (0, image_height - watermark_height)
     elif watermark_position == "BOTTOM_RIGHT":
         return (image_width - watermark_width, image_height - watermark_height)
-    elif watermark_position == "TOP_LEFT":
-        return (0, 0)
-    elif watermark_position == "BOTTOM_LEFT":
-        return (0, image_height - watermark_height)
     elif watermark_position == "CENTER":
         return ((image_width - watermark_width) // 2, (image_height - watermark_height) // 2)
+    elif watermark_position == "TOP_LEFT":
+        return (0, 0)
+    elif watermark_position == "TOP_RIGHT":
+        return (image_width - watermark_width, 0)
     else:
         return None
 
 def add_watermark(input_path, output_path, watermark_path, watermark_factor, watermark_opacity, watermark_position):
     watermark = Image.open(watermark_path)
-    
+
     # Calculate new dimensions for the watermark image
     watermark_width = int(watermark.width * watermark_factor)
     watermark_height = int(watermark.height * watermark_factor)
     watermark = watermark.resize((watermark_width, watermark_height))
-    
+
     watermark = watermark.convert("RGBA")
     watermark_with_opacity = Image.new("RGBA", watermark.size)
     for x in range(watermark.width):
@@ -51,22 +51,25 @@ def add_watermark(input_path, output_path, watermark_path, watermark_factor, wat
         if image_file.lower().endswith(('.png', '.jpg', '.jpeg', '.gif')):
             image_path = os.path.join(input_path, image_file)
             image = Image.open(image_path)
-            
-            watermark_pos = calculate_watermark_position(image, watermark_with_opacity, watermark_position)
-            if watermark_pos:
+
+            if watermark_pos := calculate_watermark_position(
+                image, watermark_with_opacity, watermark_position
+            ):
                 image.paste(watermark_with_opacity, watermark_pos, watermark_with_opacity)
                 output_file = os.path.join(output_path, image_file)
                 image.save(output_file)
-                print(BLUE_COLOR + f"Watermark added: {image_file}" + RESET_COLOR)
+                print(f"{BLUE_COLOR}Watermark added: {image_file}{RESET_COLOR}")
             else:
                 print(f"Skipping {image_file}: Invalid watermark position")
 
-    print(GREEN_COLOR + f"""
+    print(
+        f"""{GREEN_COLOR}
 ---------------------------------------                                   
  █▀▀ █▀█ █▀▄▀█ █▀█ █░░ █▀▀ ▀█▀ █▀▀ █▀▄
  █▄▄ █▄█ █░▀░█ █▀▀ █▄▄ ██▄ ░█░ ██▄ █▄▀
 ---------------------------------------            
-          """ )
+          """
+    )
 
 if __name__ == "__main__":
     input_folder = "data"
