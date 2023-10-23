@@ -61,12 +61,12 @@ def add_watermark(input_path, output_path, watermark_path, watermark_factor, wat
             else:
                 print(f"Skipping {image_file}: Invalid watermark position")
 
-    print(GREEN_COLOR + f"""
+    print(GREEN_COLOR + """
 ---------------------------------------                                   
  █▀▀ █▀█ █▀▄▀█ █▀█ █░░ █▀▀ ▀█▀ █▀▀ █▀▄
  █▄▄ █▄█ █░▀░█ █▀▀ █▄▄ ██▄ ░█░ ██▄ █▄▀
 ---------------------------------------            
-          """ )
+          """ + RESET_COLOR)
 
 if __name__ == "__main__":
     input_folder = "data"
